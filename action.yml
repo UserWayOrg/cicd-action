@@ -1,0 +1,63 @@
+name: "Accessibility Analysis"
+description: "Analyze the accessability of a website"
+
+inputs:
+  github_token:
+    description: "GitHub token"
+    required: true
+  userway_token:
+    description: "Project token"
+    required: true
+  organization:
+    description: "Organization name"
+    required: true
+  project:
+    description: "Project name"
+    required: true
+
+  commit:
+    description: "Commit hash"
+    default: ${{ github.event.pull_request.head.sha || github.sha }}
+  branch:
+    description: "Branch name"
+    default: ${{ github.event.pull_request.head.ref || github.ref }}
+  target:
+    description: "Target branch"
+    default: ${{ github.event.pull_request.base.ref }}
+  pull_request:
+    description: "Pull request number"
+    default: ${{ github.event.pull_request.number }}
+  contributor_name:
+    description: "Contributor name"
+    default: ${{ github.actor }}
+  contributor_email:
+    description: "Contributor email"
+
+  retention:
+    description: "Retention period"
+  scope:
+    description: "Analysis scope"
+  assigneeEmail:
+    description: "Assignee email"
+  framework:
+    description: "Test ramework"
+
+  path:
+    description: "Path to the report folder"
+  concurrency:
+    description: "Artifact upload concurrency"
+
+  server:
+    description: "Server url"
+  verbose:
+    description: "Verbose mode"
+  timeout:
+    description: "Timeout"
+
+outputs:
+  score:
+    description: "Accessability score"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
