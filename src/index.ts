@@ -1,6 +1,5 @@
 import * as core from "@actions/core";
 import * as userway from "@userway/cicd-core";
-import { logger } from "./logger";
 import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function run() {
@@ -33,7 +32,12 @@ async function run() {
     verbose: core.isDebug(),
   });
 
-  const { score } = await userway.analyze(config, logger);
+  const { score } = await userway.analyze(config, {
+    info: core.info,
+    warn: core.warning,
+    error: core.error,
+    debug: core.debug,
+  });
 
   if (score.outcome === "FAILED") {
     throw new Error("Quality gate is failed");
