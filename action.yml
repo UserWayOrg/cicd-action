@@ -20,10 +20,10 @@ inputs:
     default: ${{ github.event.pull_request.head.sha || github.sha }}
   branch:
     description: "Branch name"
-    default: ${{ github.event.pull_request.head.ref || github.ref }}
+    default: ${{ github.head_ref || github.ref_name }}
   target:
     description: "Target branch"
-    default: ${{ github.event.pull_request.base.ref }}
+    default: ${{ github.base_ref }}
   pull_request:
     description: "Pull request number"
     default: ${{ github.event.pull_request.number }}
@@ -37,7 +37,7 @@ inputs:
     description: "Retention period"
   scope:
     description: "Analysis scope"
-  assigneeEmail:
+  assignee_email:
     description: "Assignee email"
   framework:
     description: "Test ramework"

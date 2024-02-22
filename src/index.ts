@@ -1,10 +1,10 @@
 import * as core from "@actions/core";
-import * as userway from "@userway/a11y-kit";
-import { fetchEmail } from "./fetchEmail";
-import { trim } from "./trim";
+import * as userway from "@userway/cicd-core";
+import { logger } from "./logger";
+import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function run() {
-  const trimed = trim({
+  const trimed = stripUndefinedProperties({
     token: core.getInput("userway_token", { required: true }),
     organization: core.getInput("organization", { required: true }),
     project: core.getInput("project", { required: true }),
@@ -28,17 +28,12 @@ async function run() {
     timeout: core.getInput("timeout"),
   });
 
-  const githubToken = core.getInput("github_token", { required: true });
-  const email = (await fetchEmail(githubToken, trimed.contributorName))!;
-
   const config = await userway.schema.analyze.parseAsync({
     ...trimed,
-    assigneeEmail: trimed.assigneeEmail || email,
-    contributorEmail: trimed.contributorEmail || email,
-    verbose: core.getBooleanInput("verbose"),
+    verbose: core.isDebug(),
   });
 
-  const score = await userway.analyze(config);
+  const { score } = await userway.analyze(config, logger);
 
   if (score.outcome === "FAILED") {
     throw new Error("Quality gate is failed");
