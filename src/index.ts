@@ -5,7 +5,7 @@ import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function run() {
   const trimed = stripUndefinedProperties({
-    token: core.getInput("userway_token", { required: true }),
+    token: core.getInput("token", { required: true }),
     organization: core.getInput("organization", { required: true }),
     project: core.getInput("project", { required: true }),
 

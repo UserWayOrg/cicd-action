@@ -33679,7 +33679,7 @@ const logger_1 = __nccwpck_require__(4636);
 const stripUndefinedProperties_1 = __nccwpck_require__(1971);
 async function run() {
     const trimed = (0, stripUndefinedProperties_1.stripUndefinedProperties)({
-        token: core.getInput("userway_token", { required: true }),
+        token: core.getInput("token", { required: true }),
         organization: core.getInput("organization", { required: true }),
         project: core.getInput("project", { required: true }),
         commit: core.getInput("commit"),
