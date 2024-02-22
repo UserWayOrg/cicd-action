@@ -2,10 +2,7 @@ name: "Accessibility Analysis"
 description: "Analyze the accessability of a website"
 
 inputs:
-  github_token:
-    description: "GitHub token"
-    required: true
-  userway_token:
+  token:
     description: "Project token"
     required: true
   organization:
