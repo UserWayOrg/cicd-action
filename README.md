@@ -1,5 +1,7 @@
 ### Watch your website accessibility compliance with Continuous Accessibility*
 
+![img.png](cicd-logo.png)
+
 Continuous Accessibility helps developers maintain high WCAG and ADA compliance in their web applications through automated analysis of pull requests and branches. Continuous Accessibility detects accessibility violations and provides clear remediation guidance to help fix issues.
 
 **Fine-grained feedback, early in development cycle** - analyze your web applications automatically after every commit and get a comprehensive report in your pull request directly.
