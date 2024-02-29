@@ -33,10 +33,7 @@ async function run() {
   });
 
   const { score } = await userway.analyze(config, {
-    info: core.info,
-    warn: core.warning,
-    error: core.error,
-    debug: core.debug,
+    logger: { ...core, warn: core.warning },
   });
 
   if (score.outcome === "FAILED") {

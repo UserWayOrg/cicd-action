@@ -4,7 +4,6 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "yarn run co:login",
     "co:login": "aws codeartifact login --tool npm --repository userway-npm --domain userway --domain-owner --region us-west-2 384064702811 --profile userway-codeartifact-profile",
     "package": "ncc build src/index.ts --license licenses.txt"
   },
@@ -14,7 +13,7 @@
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",
-    "@userway/cicd-core": "^0.0.2"
+    "@userway/cicd-core": "^0.0.14"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
