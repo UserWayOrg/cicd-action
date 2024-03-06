@@ -36013,8 +36013,8 @@ async function run() {
     switch (trimed.command) {
         case "analyze": {
             const config = await userway.schema.analyze.parseAsync({
-                ...trimed,
                 ...file,
+                ...trimed,
             });
             if (config.dryRun) {
                 core.info(JSON.stringify(config));
@@ -36026,8 +36026,8 @@ async function run() {
         }
         case "scan": {
             const config = await userway.schema.scan.parseAsync({
-                ...trimed,
                 ...file,
+                ...trimed,
             });
             if (config.dryRun) {
                 core.info(JSON.stringify(config));
