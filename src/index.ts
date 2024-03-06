@@ -29,7 +29,7 @@ async function run() {
     server: core.getInput("server"),
     timeout: core.getInput("timeout"),
     verbose: core.getBooleanInput("verbose") || core.isDebug(),
-    dryRun: core.getBooleanInput("dryRun"),
+    dryRun: core.getBooleanInput("dry_run"),
   });
 
   const file = await userway.file.read<object>(trimed.config).catch(() => ({}));
