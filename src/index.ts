@@ -4,9 +4,12 @@ import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function run() {
   const trimed = stripUndefinedProperties({
-    token: core.getInput("token", { required: true }),
-    organization: core.getInput("organization", { required: true }),
-    project: core.getInput("project", { required: true }),
+    command: core.getInput("command"),
+    config: core.getInput("config"),
+
+    token: core.getInput("token"),
+    organization: core.getInput("organization"),
+    project: core.getInput("project"),
 
     commit: core.getInput("commit"),
     branch: core.getInput("branch"),
@@ -20,31 +23,43 @@ async function run() {
     assigneeEmail: core.getInput("assignee_email"),
     framework: core.getInput("framework"),
 
-    path: core.getInput("path"),
+    reportPath: core.getInput("reportPath"),
     concurrency: core.getInput("concurrency"),
 
     server: core.getInput("server"),
     timeout: core.getInput("timeout"),
+    verbose: core.getBooleanInput("verbose") || core.isDebug(),
   });
 
-  const config = await userway.schema.analyze.parseAsync({
-    ...trimed,
-    verbose: core.isDebug(),
-  });
+  const file = await userway.file.read<object>(trimed.config).catch(() => ({}));
 
-  const { score } = await userway.analyze(config, {
-    logger: { ...core, warn: core.warning },
-  });
-
-  if (score.outcome === "FAILED") {
-    throw new Error("Quality gate is failed");
+  switch (trimed.command) {
+    case "analyze": {
+      const config = await userway.schema.analyze.parseAsync({
+        ...trimed,
+        ...file,
+      });
+      return await userway.analyze(config, {
+        logger: { ...core, warn: core.warning },
+      });
+    }
+    case "scan": {
+      const config = await userway.schema.scan.parseAsync({
+        ...trimed,
+        ...file,
+      });
+      return await userway.scan(config, {
+        logger: { ...core, warn: core.warning },
+      });
+    }
+    default: {
+      throw new Error(`Unknown command: ${trimed.command}`);
+    }
   }
-
-  return score;
 }
 
 run()
-  .then((score) => {
+  .then(({ score }) => {
     core.setOutput("score", score);
   })
   .catch((error) => {

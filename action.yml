@@ -2,15 +2,19 @@ name: "Accessibility Analysis"
 description: "Analyze the accessability of a website"
 
 inputs:
+  command:
+    description: "Command to run"
+    required: true
+  config:
+    description: "Configuration file path"
+
   token:
     description: "Project token"
-    required: true
   organization:
     description: "Organization name"
-    required: true
   project:
     description: "Project name"
-    required: true
+    default: ${{ github.event.repository.name }}
 
   commit:
     description: "Commit hash"
