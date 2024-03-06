@@ -40,6 +40,12 @@ async function run() {
         ...trimed,
         ...file,
       });
+
+      if (config.dryRun) {
+        core.info(JSON.stringify(config));
+        process.exit(0);
+      }
+
       return await userway.analyze(config, {
         logger: { ...core, warn: core.warning },
       });
@@ -49,6 +55,12 @@ async function run() {
         ...trimed,
         ...file,
       });
+
+      if (config.dryRun) {
+        core.info(JSON.stringify(config));
+        process.exit(0);
+      }
+
       return await userway.scan(config, {
         logger: { ...core, warn: core.warning },
       });
