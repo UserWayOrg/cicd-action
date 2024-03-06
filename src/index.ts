@@ -4,7 +4,7 @@ import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function run() {
   const trimed = stripUndefinedProperties({
-    command: core.getInput("command"),
+    command: core.getInput("command", { required: true }),
     config: core.getInput("config"),
 
     token: core.getInput("token"),
@@ -29,6 +29,7 @@ async function run() {
     server: core.getInput("server"),
     timeout: core.getInput("timeout"),
     verbose: core.getBooleanInput("verbose") || core.isDebug(),
+    dryRun: core.getBooleanInput("dryRun"),
   });
 
   const file = await userway.file.read<object>(trimed.config).catch(() => ({}));
