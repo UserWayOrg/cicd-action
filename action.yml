@@ -1,5 +1,5 @@
 name: "Accessibility Analysis"
-description: "Analyze the accessability of a website"
+description: "Analyze the accessibility of a website"
 
 inputs:
   command:
@@ -59,7 +59,7 @@ inputs:
 
 outputs:
   score:
-    description: "Accessability score"
+    description: "Accessibility score"
 
 runs:
   using: "node20"
