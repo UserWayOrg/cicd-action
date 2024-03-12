@@ -2,9 +2,6 @@ name: "Accessibility Analysis"
 description: "Analyze the accessibility of a website"
 
 inputs:
-  command:
-    description: "Command to run"
-    required: true
   config:
     description: "Configuration file path"
 
@@ -14,23 +11,17 @@ inputs:
     description: "Organization name"
   project:
     description: "Project name"
-    default: ${{ github.event.repository.name }}
 
   commit:
     description: "Commit hash"
-    default: ${{ github.event.pull_request.head.sha || github.sha }}
   branch:
     description: "Branch name"
-    default: ${{ github.head_ref || github.ref_name }}
   target:
     description: "Target branch"
-    default: ${{ github.base_ref }}
   pull_request:
     description: "Pull request number"
-    default: ${{ github.event.pull_request.number }}
   contributor_name:
     description: "Contributor name"
-    default: ${{ github.actor }}
   contributor_email:
     description: "Contributor email"
 
@@ -50,8 +41,6 @@ inputs:
 
   server:
     description: "Server url"
-  verbose:
-    description: "Verbose mode"
   timeout:
     description: "Timeout"
   dry_run:

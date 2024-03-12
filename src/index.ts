@@ -1,10 +1,33 @@
 import * as core from "@actions/core";
+import * as github from "@actions/github";
 import * as userway from "@userway/cicd-core";
 import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
+async function scan({
+  project = github.context.payload.repository?.name,
+  commit = github.context.payload.pull_request?.head.sha || github.context.sha,
+  branch = github.context.payload.pull_request?.head.ref || github.context.ref,
+  target = github.context.payload.pull_request?.base.ref,
+  pullRequest = github.context.payload.pull_request?.number,
+  contributorName = github.context.actor,
+  ...config
+}: any) {
+  return await userway.scan(
+    {
+      project,
+      commit,
+      branch,
+      target,
+      pullRequest,
+      contributorName,
+      ...config,
+    },
+    { logger: { ...core, warn: core.warning } }
+  );
+}
+
 async function run() {
   const trimed = stripUndefinedProperties({
-    command: core.getInput("command", { required: true }),
     config: core.getInput("config"),
 
     token: core.getInput("token"),
@@ -21,54 +44,29 @@ async function run() {
     retention: core.getInput("retention"),
     scope: core.getInput("scope"),
     assigneeEmail: core.getInput("assignee_email"),
-    framework: core.getInput("framework"),
 
     reportPath: core.getInput("reportPath"),
     concurrency: core.getInput("concurrency"),
 
     server: core.getInput("server"),
     timeout: core.getInput("timeout"),
-    verbose: core.getBooleanInput("verbose") || core.isDebug(),
-    dryRun: core.getBooleanInput("dry_run"),
+    dryRun: core.getInput("dry_run") === "true",
+    verbose: core.isDebug(),
   });
 
   const file = await userway.file.read<object>(trimed.config).catch(() => ({}));
 
-  switch (trimed.command) {
-    case "analyze": {
-      const config = await userway.schema.analyze.parseAsync({
-        ...file,
-        ...trimed,
-      });
+  const config = await userway.schema.scan.parseAsync({
+    ...file,
+    ...trimed,
+  });
 
-      if (config.dryRun) {
-        core.info(JSON.stringify(config));
-        process.exit(0);
-      }
-
-      return await userway.analyze(config, {
-        logger: { ...core, warn: core.warning },
-      });
-    }
-    case "scan": {
-      const config = await userway.schema.scan.parseAsync({
-        ...file,
-        ...trimed,
-      });
-
-      if (config.dryRun) {
-        core.info(JSON.stringify(config));
-        process.exit(0);
-      }
-
-      return await userway.scan(config, {
-        logger: { ...core, warn: core.warning },
-      });
-    }
-    default: {
-      throw new Error(`Unknown command: ${trimed.command}`);
-    }
+  if (config.dryRun) {
+    core.info(JSON.stringify(config));
+    process.exit(0);
   }
+
+  return await scan(config);
 }
 
 run()

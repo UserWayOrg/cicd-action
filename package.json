@@ -1,10 +1,9 @@
 {
-  "name": "accessibility-analysis",
+  "name": "cicd-action",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "co:login": "aws codeartifact login --tool npm --repository userway-npm --domain userway --domain-owner --region us-west-2 384064702811 --profile userway-codeartifact-profile",
     "package": "ncc build src/index.ts --license licenses.txt"
   },
   "keywords": [],
