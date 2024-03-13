@@ -510,10 +510,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-@userway/cicd-core
-
-@userway/continuous-a11y-api
+@userway/cicd-api
 ISC
+
+@userway/cicd-core
 
 @vercel/ncc
 MIT

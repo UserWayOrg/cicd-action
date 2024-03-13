@@ -4,14 +4,14 @@ import * as userway from "@userway/cicd-core";
 import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function scan({
-  project = github.context.payload.repository?.name,
+  project = github.context.payload.repository?.name!,
   commit = github.context.payload.pull_request?.head.sha || github.context.sha,
   branch = github.context.payload.pull_request?.head.ref || github.context.ref,
   target = github.context.payload.pull_request?.base.ref,
   pullRequest = github.context.payload.pull_request?.number,
   contributorName = github.context.actor,
   ...config
-}: any) {
+}: userway.Options) {
   return await userway.scan(
     {
       project,
@@ -54,9 +54,9 @@ async function run() {
     verbose: core.isDebug(),
   });
 
-  const file = await userway.file.read<object>(trimed.config).catch(() => ({}));
+  const file = await userway.read<object>(trimed.config).catch(() => ({}));
 
-  const config = await userway.schema.scan.parseAsync({
+  const config = await userway.config.parseAsync({
     ...file,
     ...trimed,
   });
