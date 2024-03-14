@@ -45,7 +45,7 @@ async function run() {
     scope: core.getInput("scope"),
     assigneeEmail: core.getInput("assignee_email"),
 
-    reportPath: core.getInput("reportPath"),
+    reportPaths: core.getMultilineInput("report_paths"),
     concurrency: core.getInput("concurrency"),
 
     server: core.getInput("server"),

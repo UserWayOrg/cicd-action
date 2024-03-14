@@ -31,11 +31,9 @@ inputs:
     description: "Analysis scope"
   assignee_email:
     description: "Assignee email"
-  framework:
-    description: "Test ramework"
 
-  path:
-    description: "Path to the report folder"
+  report_paths:
+    description: "Paths to report folders"
   concurrency:
     description: "Artifact upload concurrency"
 
