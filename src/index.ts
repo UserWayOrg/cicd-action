@@ -63,7 +63,10 @@ async function run() {
     ...trimed,
   });
 
-  core.info(trimed.config);
+  core.info("config " + trimed.config);
+  core.info("file");
+  core.info(JSON.stringify(file));
+  core.info("config");
   core.info(JSON.stringify(config));
   if (config.dryRun) {
     
