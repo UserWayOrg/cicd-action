@@ -39474,6 +39474,7 @@ async function scan({ project = github.context.payload.repository?.name, commit 
     }, { logger: { ...core, warn: core.warning } });
 }
 async function run() {
+    const reportPaths = core.getMultilineInput("report_paths");
     const trimed = (0, stripUndefinedProperties_1.stripUndefinedProperties)({
         config: core.getInput("config"),
         token: core.getInput("token"),
@@ -39488,7 +39489,7 @@ async function run() {
         retention: core.getInput("retention"),
         scope: core.getInput("scope"),
         assigneeEmail: core.getInput("assignee_email"),
-        reportPaths: core.getMultilineInput("report_paths"),
+        reportPaths: reportPaths.length > 0 ? reportPaths : undefined,
         concurrency: core.getInput("concurrency"),
         server: core.getInput("server"),
         timeout: core.getInput("timeout"),
@@ -39500,6 +39501,10 @@ async function run() {
         ...file,
         ...trimed,
     });
+    core.info("config " + trimed.config);
+    core.info("file");
+    core.info(JSON.stringify(file));
+    core.info("config");
     core.info(JSON.stringify(config));
     if (config.dryRun) {
         process.exit(0);
