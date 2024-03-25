@@ -39500,8 +39500,8 @@ async function run() {
         ...file,
         ...trimed,
     });
+    core.info(JSON.stringify(config));
     if (config.dryRun) {
-        core.info(JSON.stringify(config));
         process.exit(0);
     }
     return await scan(config);

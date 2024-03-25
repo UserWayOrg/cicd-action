@@ -61,8 +61,9 @@ async function run() {
     ...trimed,
   });
 
+  core.info(JSON.stringify(config));
   if (config.dryRun) {
-    core.info(JSON.stringify(config));
+    
     process.exit(0);
   }
 
