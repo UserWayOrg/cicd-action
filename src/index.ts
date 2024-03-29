@@ -27,8 +27,6 @@ async function scan({
 }
 
 async function run() {
-  const reportPaths = core.getMultilineInput("report_paths");
-
   const trimed = stripUndefinedProperties({
     config: core.getInput("config"),
 
@@ -47,7 +45,7 @@ async function run() {
     scope: core.getInput("scope"),
     assigneeEmail: core.getInput("assignee_email"),
 
-    reportPaths: reportPaths.length > 0 ? reportPaths : undefined,
+    reportPaths: core.getMultilineInput("report_paths"),
     concurrency: core.getInput("concurrency"),
 
     server: core.getInput("server"),
@@ -62,7 +60,7 @@ async function run() {
     ...file,
     ...trimed,
   });
-  
+
   if (config.dryRun) {
     core.info(JSON.stringify(config));
     process.exit(0);
