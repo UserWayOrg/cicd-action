@@ -12,8 +12,10 @@ inputs:
   project:
     description: "Project name"
 
-  commit:
+  commit_hash:
     description: "Commit hash"
+  commit_message:
+    description: "Commit message"
   branch:
     description: "Branch name"
   target:

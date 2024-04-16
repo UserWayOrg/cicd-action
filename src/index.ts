@@ -5,7 +5,8 @@ import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function scan({
   project = github.context.payload.repository?.name!,
-  commit = github.context.payload.pull_request?.head.sha || github.context.sha,
+  commitHash = github.context.payload.pull_request?.head.sha ||
+    github.context.sha,
   branch = github.context.payload.pull_request?.head.ref || github.context.ref,
   target = github.context.payload.pull_request?.base.ref,
   pullRequest = github.context.payload.pull_request?.number,
@@ -15,7 +16,7 @@ async function scan({
   return await userway.scan(
     {
       project,
-      commit,
+      commitHash,
       branch,
       target,
       pullRequest,
@@ -34,7 +35,8 @@ async function run() {
     organization: core.getInput("organization"),
     project: core.getInput("project"),
 
-    commit: core.getInput("commit"),
+    commitHash: core.getInput("commit_hash"),
+    commitMessage: core.getInput("commit_message"),
     branch: core.getInput("branch"),
     target: core.getInput("target"),
     pullRequest: core.getInput("pull_request"),
