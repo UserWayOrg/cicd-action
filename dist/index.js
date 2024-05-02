@@ -39587,8 +39587,14 @@ async function run() {
 }
 run()
     .then(({ score }) => {
-    core.info(`Quality gate outcome is ${score.outcome}`);
-    core.setOutput("score", score);
+    const message = `Quality gate outcome is ${score.outcome}`;
+    if (score.outcome === "FAILED") {
+        core.setFailed(message);
+    }
+    else {
+        core.info(message);
+        core.setOutput("score", score);
+    }
 })
     .catch((error) => {
     core.setFailed(error.message);
