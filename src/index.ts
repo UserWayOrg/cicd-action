@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as userway from "@userway/cicd-core";
-import { stripUndefinedProperties } from "./stripUndefinedProperties";
+import { stripEmptyProperties } from "src/stripEmptyProperties";
 
 async function scan({
   project = github.context.payload.repository?.name!,
@@ -12,7 +12,7 @@ async function scan({
   pullRequest = github.context.payload.pull_request?.number,
   contributorName = github.context.actor,
   ...config
-}: userway.Options) {
+}: userway.OutputOptions) {
   return await userway.scan(
     {
       project,
@@ -28,7 +28,7 @@ async function scan({
 }
 
 async function run() {
-  const trimed = stripUndefinedProperties({
+  const trimmed = stripEmptyProperties({
     config: core.getInput("config"),
 
     token: core.getInput("token"),
@@ -56,11 +56,11 @@ async function run() {
     verbose: core.isDebug(),
   });
 
-  const file = await userway.read<object>(trimed.config).catch(() => ({}));
+  const file = await userway.read<object>(trimmed.config).catch(() => ({}));
 
   const config = await userway.config.parseAsync({
     ...file,
-    ...trimed,
+    ...trimmed,
   });
 
   if (config.dryRun) {
@@ -73,7 +73,9 @@ async function run() {
 
 run()
   .then(({ score }) => {
-    core.info(`Quality gate outcome is ${score.outcome}`);
+    const message = `Quality gate outcome is ${score.outcome}`;
+
+    core.info(message);
     core.setOutput("score", score);
   })
   .catch((error) => {
