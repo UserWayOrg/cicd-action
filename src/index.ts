@@ -1,7 +1,6 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as userway from "@userway/cicd-core";
-import { stripUndefinedProperties } from "./stripUndefinedProperties";
 
 async function scan({
   project = github.context.payload.repository?.name!,
@@ -12,7 +11,7 @@ async function scan({
   pullRequest = github.context.payload.pull_request?.number,
   contributorName = github.context.actor,
   ...config
-}: userway.Options) {
+}: userway.OutputOptions) {
   return await userway.scan(
     {
       project,
@@ -28,7 +27,7 @@ async function scan({
 }
 
 async function run() {
-  const trimed = stripUndefinedProperties({
+  const trimed = userway.purgeUndefined({
     config: core.getInput("config"),
 
     token: core.getInput("token"),
