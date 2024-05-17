@@ -40551,20 +40551,21 @@ const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const userway = __importStar(__nccwpck_require__(1203));
 const stripEmptyProperties_1 = __nccwpck_require__(1385);
-async function scan({ project = github.context.payload.repository?.name, commitHash = github.context.payload.pull_request?.head.sha ||
-    github.context.sha, branch = github.context.payload.pull_request?.head.ref || github.context.ref, target = github.context.payload.pull_request?.base.ref, pullRequest = github.context.payload.pull_request?.number, contributorName = github.context.actor, ...config }) {
-    return await userway.scan({
-        project,
-        commitHash,
-        branch,
-        target,
-        pullRequest,
-        contributorName,
-        ...config,
-    }, { logger: { ...core, warn: core.warning } });
+function buildLogger() {
+    return { ...core, warn: core.warning };
 }
-async function run() {
-    const trimmed = (0, stripEmptyProperties_1.stripEmptyProperties)({
+function buildContextConfig() {
+    return userway.purgeUndefined({
+        project: github.context.payload.repository?.name,
+        commitHash: github.context.payload.pull_request?.head.sha ?? github.context.sha,
+        branch: github.context.payload.pull_request?.head.ref || github.context.ref,
+        target: github.context.payload.pull_request?.base.ref,
+        pullRequest: github.context.payload.pull_request?.number,
+        contributorName: github.context.actor,
+    });
+}
+function buildActionConfig() {
+    return (0, stripEmptyProperties_1.stripEmptyProperties)({
         config: core.getInput("config"),
         token: core.getInput("token"),
         organization: core.getInput("organization"),
@@ -40586,16 +40587,25 @@ async function run() {
         dryRun: core.getInput("dry_run") === "true",
         verbose: core.isDebug(),
     });
-    const file = await userway.read(trimmed.config).catch(() => ({}));
+}
+async function run() {
+    const actionConfig = buildActionConfig();
+    const contextConfig = buildContextConfig();
+    const fileConfig = await userway
+        .read(actionConfig.config)
+        .catch(() => ({}));
+    core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
     const config = await userway.config.parseAsync({
-        ...file,
-        ...trimmed,
+        ...contextConfig,
+        ...fileConfig,
+        ...actionConfig,
     });
+    core.debug(JSON.stringify({ config }));
     if (config.dryRun) {
         core.info(JSON.stringify(config));
         process.exit(0);
     }
-    return await scan(config);
+    return await userway.scan(config, { logger: buildLogger() });
 }
 run()
     .then(({ score }) => {
