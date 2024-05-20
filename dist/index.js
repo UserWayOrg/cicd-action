@@ -40555,12 +40555,29 @@ function buildLogger() {
     return { ...core, warn: core.warning };
 }
 function buildContextConfig() {
+    if (github.context.eventName === "push") {
+        return userway.purgeUndefined({
+            project: github.context.payload.repository?.name,
+            commitHash: github.context.sha,
+            branch: github.context.ref.replace("refs/heads/", ""),
+            target: github.context.payload.pull_request?.base.ref,
+            pullRequest: github.context.payload.pull_request?.number,
+            contributorName: github.context.actor,
+        });
+    }
+    if (github.context.payload.pull_request) {
+        userway.purgeUndefined({
+            project: github.context.payload.repository?.name,
+            commitHash: github.context.payload.pull_request.head.sha,
+            branch: github.context.payload.pull_request.head.re,
+            target: github.context.payload.pull_request.base.ref,
+            pullRequest: github.context.payload.pull_request,
+            contributorName: github.context.actor,
+        });
+    }
     return userway.purgeUndefined({
         project: github.context.payload.repository?.name,
-        commitHash: github.context.payload.pull_request?.head.sha ?? github.context.sha,
-        branch: github.context.payload.pull_request?.head.ref || github.context.ref,
-        target: github.context.payload.pull_request?.base.ref,
-        pullRequest: github.context.payload.pull_request?.number,
+        commitHash: github.context.sha,
         contributorName: github.context.actor,
     });
 }
