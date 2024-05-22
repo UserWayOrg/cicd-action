@@ -47,6 +47,7 @@ function buildActionConfig() {
 
     commitHash: core.getInput("commit_hash"),
     commitMessage: core.getInput("commit_message"),
+    commitCreateAt: core.getInput("commit_create_at"),
     branch: core.getInput("branch"),
     targetBranch: core.getInput("target_branch"),
     pullRequest: core.getInput("pull_request"),
