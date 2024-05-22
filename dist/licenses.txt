@@ -274,10 +274,43 @@ IN THE SOFTWARE.
    limitations under the License.
 
 
+@ngrok/ngrok-android-arm-eabi
+MIT
+
+@ngrok/ngrok-android-arm64
+MIT
+
 @ngrok/ngrok-darwin-arm64
 MIT
 
 @ngrok/ngrok-darwin-universal
+MIT
+
+@ngrok/ngrok-darwin-x64
+MIT
+
+@ngrok/ngrok-freebsd-x64
+MIT
+
+@ngrok/ngrok-linux-arm-gnueabihf
+MIT
+
+@ngrok/ngrok-linux-arm64-gnu
+MIT
+
+@ngrok/ngrok-linux-arm64-musl
+MIT
+
+@ngrok/ngrok-linux-x64-gnu
+MIT
+
+@ngrok/ngrok-linux-x64-musl
+MIT
+
+@ngrok/ngrok-win32-ia32-msvc
+MIT
+
+@ngrok/ngrok-win32-x64-msvc
 MIT
 
 @octokit/auth-token

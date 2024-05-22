@@ -18,7 +18,7 @@ inputs:
     description: "Commit message"
   branch:
     description: "Branch name"
-  target:
+  target_branch:
     description: "Target branch"
   pull_request:
     description: "Pull request number"

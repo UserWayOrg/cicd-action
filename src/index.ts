@@ -13,19 +13,19 @@ function buildContextConfig() {
       project: github.context.payload.repository?.name!,
       commitHash: github.context.sha,
       branch: github.context.ref.replace("refs/heads/", ""),
-      target: github.context.payload.pull_request?.base.ref,
+      targetBranch: github.context.payload.pull_request?.base.ref,
       pullRequest: github.context.payload.pull_request?.number,
       contributorName: github.context.actor,
     });
   }
 
   if (github.context.payload.pull_request) {
-    userway.purgeUndefined({
+    return userway.purgeUndefined({
       project: github.context.payload.repository?.name!,
       commitHash: github.context.payload.pull_request.head.sha,
-      branch: github.context.payload.pull_request.head.re,
-      target: github.context.payload.pull_request.base.ref,
-      pullRequest: github.context.payload.pull_request,
+      branch: github.context.payload.pull_request.head.ref,
+      targetBranch: github.context.payload.pull_request.base.ref,
+      pullRequest: github.context.payload.pull_request?.number,
       contributorName: github.context.actor,
     });
   }
@@ -49,7 +49,7 @@ function buildActionConfig() {
     commitMessage: core.getInput("commit_message"),
     commitCreateAt: core.getInput("commit_create_at"),
     branch: core.getInput("branch"),
-    target: core.getInput("target"),
+    targetBranch: core.getInput("target_branch"),
     pullRequest: core.getInput("pull_request"),
     contributorName: core.getInput("contributor_name"),
     contributorEmail: core.getInput("contributor_email"),
@@ -96,9 +96,7 @@ async function run() {
 
 run()
   .then(({ score }) => {
-    const message = `Quality gate outcome is ${score.outcome}`;
-
-    core.info(message);
+    core.info(`Quality gate outcome is ${score.outcome}`);
     core.setOutput("score", score);
   })
   .catch((error) => {
