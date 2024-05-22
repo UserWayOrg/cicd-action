@@ -1,9 +1,9 @@
 export function stripEmptyProperties<T>(object: T): T {
-    const result = {} as T;
-    for (const key in object) {
-        if (object[key] !== "") {
-            result[key] = object[key];
-        }
+  const result = {} as T;
+  for (const key in object) {
+    if (object[key] !== "") {
+      result[key] = object[key];
     }
-    return result;
+  }
+  return result;
 }
