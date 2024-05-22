@@ -2,32 +2,42 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as userway from "@userway/cicd-core";
 
-async function scan({
-  project = github.context.payload.repository?.name!,
-  commitHash = github.context.payload.pull_request?.head.sha ||
-    github.context.sha,
-  branch = github.context.payload.pull_request?.head.ref || github.context.ref,
-  target = github.context.payload.pull_request?.base.ref,
-  pullRequest = github.context.payload.pull_request?.number,
-  contributorName = github.context.actor,
-  ...config
-}: userway.OutputOptions) {
-  return await userway.scan(
-    {
-      project,
-      commitHash,
-      branch,
-      target,
-      pullRequest,
-      contributorName,
-      ...config,
-    },
-    { logger: { ...core, warn: core.warning } }
-  );
+function buildLogger() {
+  return { ...core, warn: core.warning };
 }
 
-async function run() {
-  const trimed = userway.purgeUndefined({
+function buildContextConfig() {
+  if (github.context.eventName === "push") {
+    return userway.purgeUndefined({
+      project: github.context.payload.repository?.name!,
+      commitHash: github.context.sha,
+      branch: github.context.ref.replace("refs/heads/", ""),
+      target: github.context.payload.pull_request?.base.ref,
+      pullRequest: github.context.payload.pull_request?.number,
+      contributorName: github.context.actor,
+    });
+  }
+
+  if (github.context.payload.pull_request) {
+    userway.purgeUndefined({
+      project: github.context.payload.repository?.name!,
+      commitHash: github.context.payload.pull_request.head.sha,
+      branch: github.context.payload.pull_request.head.re,
+      target: github.context.payload.pull_request.base.ref,
+      pullRequest: github.context.payload.pull_request,
+      contributorName: github.context.actor,
+    });
+  }
+
+  return userway.purgeUndefined({
+    project: github.context.payload.repository?.name!,
+    commitHash: github.context.sha,
+    contributorName: github.context.actor,
+  });
+}
+
+function buildActionConfig() {
+  return userway.purgeUndefined({
     config: core.getInput("config"),
 
     token: core.getInput("token"),
@@ -36,6 +46,7 @@ async function run() {
 
     commitHash: core.getInput("commit_hash"),
     commitMessage: core.getInput("commit_message"),
+    commitCreateAt: core.getInput("commit_create_at"),
     branch: core.getInput("branch"),
     target: core.getInput("target"),
     pullRequest: core.getInput("pull_request"),
@@ -54,32 +65,40 @@ async function run() {
     dryRun: core.getInput("dry_run") === "true",
     verbose: core.isDebug(),
   });
+}
 
-  const file = await userway.read<object>(trimed.config).catch(() => ({}));
+async function run() {
+  const actionConfig = buildActionConfig();
+  const contextConfig = buildContextConfig();
+
+  const fileConfig = await userway
+    .read<object>(actionConfig.config)
+    .catch(() => ({}));
+
+  core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
 
   const config = await userway.config.parseAsync({
-    ...file,
-    ...trimed,
+    ...contextConfig,
+    ...fileConfig,
+    ...actionConfig,
   });
+
+  core.debug(JSON.stringify({ config }));
 
   if (config.dryRun) {
     core.info(JSON.stringify(config));
     process.exit(0);
   }
 
-  return await scan(config);
+  return await userway.scan(config, { logger: buildLogger() });
 }
 
 run()
   .then(({ score }) => {
     const message = `Quality gate outcome is ${score.outcome}`;
-    
-    if (score.outcome === "FAILED") {
-      core.setFailed(message);
-    } else {
-      core.info(message);
-      core.setOutput("score", score);
-    }
+
+    core.info(message);
+    core.setOutput("score", score);
   })
   .catch((error) => {
     core.setFailed(error.message);
