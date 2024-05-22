@@ -39883,6 +39883,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const userway = __importStar(__nccwpck_require__(1203));
+const stripEmptyProperties_1 = __nccwpck_require__(1385);
 function buildLogger() {
     return { ...core, warn: core.warning };
 }
@@ -39914,7 +39915,7 @@ function buildContextConfig() {
     });
 }
 function buildActionConfig() {
-    return userway.purgeUndefined({
+    return (0, stripEmptyProperties_1.stripEmptyProperties)({
         config: core.getInput("config"),
         token: core.getInput("token"),
         organization: core.getInput("organization"),
@@ -39966,6 +39967,27 @@ run()
     .catch((error) => {
     core.setFailed(error.message);
 });
+
+
+/***/ }),
+
+/***/ 1385:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.stripEmptyProperties = void 0;
+function stripEmptyProperties(object) {
+    const result = {};
+    for (const key in object) {
+        if (object[key] !== "") {
+            result[key] = object[key];
+        }
+    }
+    return result;
+}
+exports.stripEmptyProperties = stripEmptyProperties;
 
 
 /***/ }),

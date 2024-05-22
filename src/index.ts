@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as userway from "@userway/cicd-core";
+import { stripEmptyProperties } from "src/stripEmptyProperties";
 
 function buildLogger() {
   return { ...core, warn: core.warning };
@@ -37,7 +38,7 @@ function buildContextConfig() {
 }
 
 function buildActionConfig() {
-  return userway.purgeUndefined({
+  return stripEmptyProperties({
     config: core.getInput("config"),
 
     token: core.getInput("token"),
