@@ -47,15 +47,15 @@ function buildActionConfig() {
 
     commitHash: core.getInput("commit_hash"),
     commitMessage: core.getInput("commit_message"),
-    commitCreateAt: core.getInput("commit_create_at"),
+    commitCreatedAt: core.getInput("commit_created_at"),
     branch: core.getInput("branch"),
     targetBranch: core.getInput("target_branch"),
     pullRequest: core.getInput("pull_request"),
     contributorName: core.getInput("contributor_name"),
     contributorEmail: core.getInput("contributor_email"),
 
-    retention: core.getInput("retention"),
-    scope: core.getInput("scope"),
+    retention: core.getInput("retention") as "short" | "long" | undefined,
+    scope: core.getInput("scope") as "delta" | "overall" | undefined,
     assigneeEmail: core.getInput("assignee_email"),
 
     reportPaths: core.getMultilineInput("report_paths"),
@@ -78,11 +78,14 @@ async function run() {
 
   core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
 
-  const config = await userway.config.parseAsync({
+  const config = {
     ...contextConfig,
     ...fileConfig,
     ...actionConfig,
-  });
+    pullRequest: actionConfig.pullRequest ? parseInt(actionConfig.pullRequest) : undefined,
+    concurrency: actionConfig.concurrency ? parseInt(actionConfig.concurrency): undefined,
+    timeout: actionConfig.timeout ? parseInt(actionConfig.timeout): undefined,
+  };
 
   core.debug(JSON.stringify({ config }));
 
