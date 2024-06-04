@@ -99,7 +99,7 @@ async function run() {
 
 run()
   .then(({ score }) => {
-    core.info(`Quality gate outcome is ${score.outcome}`);
+    core.info(`Continuous Accessibility Quality Gate is ${score.outcome}`);
     core.setOutput("score", score);
   })
   .catch((error) => {
