@@ -56,7 +56,7 @@ The workflow, usually declared in .github/workflows/build.yml, looks like:
 
 **Example of pull request analysis:**
 
-Want to see more examples of Continuous Accessibility in action? You can explore Continuous Accessibility [sample project](https://github.com/UserWayOrg/sample-cypress-project-github)
+Want to see more examples of Continuous Accessibility in action? You can explore Continuous Accessibility [sample project](https://github.com/UserWayOrg/cicd-action-sample)
 
 **Have questions or feedback?**
 
