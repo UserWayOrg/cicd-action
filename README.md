@@ -57,7 +57,6 @@ The workflow, usually declared in .github/workflows/build.yml, looks like:
 **Example of pull request analysis:**
 
 Want to see more examples of Continuous Accessibility in action? You can explore Continuous Accessibility [sample project](https://github.com/UserWayOrg/sample-cypress-project-github)
-TODO refine
 
 **Have questions or feedback?**
 
@@ -67,4 +66,3 @@ To provide feedback or request assistance please [contact us](https://userway.or
 
 The Dockerfile and associated scripts and documentation in this project are released under the LGPLv3 License.
 Container images built with this project include third-party materials.
-TODO refine
