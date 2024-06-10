@@ -42517,6 +42517,8 @@ async function run() {
         .read(actionConfig.config)
         .catch(() => ({}));
     core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
+    core.info(actionConfig.pullRequest);
+    core.info(`actionConfig ${actionConfig}`);
     const config = {
         ...contextConfig,
         ...fileConfig,
