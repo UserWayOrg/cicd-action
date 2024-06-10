@@ -19,7 +19,7 @@ function buildContextConfig() {
     });
   }
 
-  core.info(`github.context.payload.pull_request, ${github.context.payload.pull_request}`);
+  core.info(`github.context.payload.pull_request, ${JSON.stringify(github.context.payload.pull_request)}`);
 
   if (github.context.payload.pull_request) {
     return userway.purgeUndefined({
@@ -81,7 +81,6 @@ async function run() {
   core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
 
   core.info(actionConfig.pullRequest);
-  core.info(`actionConfig ${JSON.stringify(actionConfig)}`);
 
   const config = {
     ...contextConfig,
@@ -91,6 +90,9 @@ async function run() {
     concurrency: actionConfig.concurrency ? parseInt(actionConfig.concurrency): undefined,
     timeout: actionConfig.timeout ? parseInt(actionConfig.timeout): undefined,
   };
+
+  core.info(`actionConfig ${JSON.stringify(config)}`);
+
 
   core.debug(JSON.stringify({ config }));
 
