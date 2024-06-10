@@ -19,6 +19,8 @@ function buildContextConfig() {
     });
   }
 
+  core.info(`github.context.payload.pull_request, ${github.context.payload.pull_request}`);
+
   if (github.context.payload.pull_request) {
     return userway.purgeUndefined({
       project: github.context.payload.repository?.name!,
