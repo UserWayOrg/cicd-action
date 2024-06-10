@@ -79,7 +79,7 @@ async function run() {
   core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
 
   core.info(actionConfig.pullRequest);
-  core.info(`actionConfig ${actionConfig}`);
+  core.info(`actionConfig ${JSON.stringify(actionConfig)}`);
 
   const config = {
     ...contextConfig,
