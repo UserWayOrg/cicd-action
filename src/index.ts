@@ -19,8 +19,6 @@ function buildContextConfig() {
     });
   }
 
-  core.info(`github.context.payload.pull_request, ${JSON.stringify(github.context.payload.pull_request)}`);
-
   if (github.context.payload.pull_request) {
     return userway.purgeUndefined({
       project: github.context.payload.repository?.name!,
@@ -80,19 +78,11 @@ async function run() {
 
   core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
 
-  core.info(actionConfig.pullRequest);
-
   const config = {
     ...contextConfig,
     ...fileConfig,
     ...actionConfig,
-    pullRequest: actionConfig.pullRequest ? parseInt(actionConfig.pullRequest) : undefined,
-    concurrency: actionConfig.concurrency ? parseInt(actionConfig.concurrency): undefined,
-    timeout: actionConfig.timeout ? parseInt(actionConfig.timeout): undefined,
   };
-
-  core.info(`actionConfig ${JSON.stringify(config)}`);
-
 
   core.debug(JSON.stringify({ config }));
 
