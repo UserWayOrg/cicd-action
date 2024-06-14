@@ -82,9 +82,6 @@ async function run() {
     ...contextConfig,
     ...fileConfig,
     ...actionConfig,
-    pullRequest: actionConfig.pullRequest ? parseInt(actionConfig.pullRequest) : undefined,
-    concurrency: actionConfig.concurrency ? parseInt(actionConfig.concurrency): undefined,
-    timeout: actionConfig.timeout ? parseInt(actionConfig.timeout): undefined,
   };
 
   core.debug(JSON.stringify({ config }));
