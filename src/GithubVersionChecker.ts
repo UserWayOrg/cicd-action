@@ -6,11 +6,11 @@ export class GithubVersionChecker implements VersionChecker {
 
   public check(versions: Record<typeof name, string>): void {
     if (this.semver.lt(version, versions[name])) {
-      this.logger.warn(this.buildMessage());
+      this.logger.warn(this.message);
     }
   }
 
-  private buildMessage(): string {
+  public get message(): string {
     return `
         The current version of ${name} is outdated.
         Please consider updating to the latest version.

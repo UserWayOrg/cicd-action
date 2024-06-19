@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import type * as userway from "@userway/cicd-core";
+import * as userway from "@userway/cicd-core";
 
 const filterEmpty = userway.filter<
   userway.Config & {
