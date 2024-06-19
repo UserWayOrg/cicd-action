@@ -5,7 +5,7 @@ branding:
   color: green
 
 inputs:
-  config:
+  config_path:
     description: "Configuration file path"
 
   token:
@@ -19,6 +19,8 @@ inputs:
     description: "Commit hash"
   commit_message:
     description: "Commit message"
+  commit_created_at:
+    description: "Commit created at"
   branch:
     description: "Branch name"
   target_branch:
