@@ -5,9 +5,7 @@ import { GithubVersionChecker } from "./GithubVersionChecker";
 import { getOptions } from "./getOptions";
 
 const logger = { ...core, warn: core.warning };
-
 const options = getOptions();
-core.debug(`Provided options: ${JSON.stringify(options)}`);
 
 scan(options, {
   logger,

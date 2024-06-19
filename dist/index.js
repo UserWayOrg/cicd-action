@@ -42605,7 +42605,6 @@ const GithubVersionChecker_1 = __nccwpck_require__(9628);
 const getOptions_1 = __nccwpck_require__(3354);
 const logger = { ...core, warn: core.warning };
 const options = (0, getOptions_1.getOptions)();
-core.debug(`Provided options: ${JSON.stringify(options)}`);
 (0, cicd_core_1.scan)(options, {
     logger,
     autodetect: new GithubAutodetectConfig_1.GithubAutodetectConfig(logger),
