@@ -71,9 +71,10 @@ function buildActionConfig() {
 async function run() {
   const actionConfig = buildActionConfig();
   const contextConfig = buildContextConfig();
+  const logger = buildLogger();
 
   const fileConfig = await userway
-    .read<object>(actionConfig.config)
+    .read<object>(actionConfig.config, { logger })
     .catch(() => ({}));
 
   core.debug(JSON.stringify({ actionConfig, contextConfig, file: fileConfig }));
