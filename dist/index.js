@@ -42458,6 +42458,12 @@ exports.GithubAutodetectConfig = void 0;
 const github = __importStar(__nccwpck_require__(5438));
 const userway = __importStar(__nccwpck_require__(1203));
 class GithubAutodetectConfig extends userway.GitAutodetectedConfig {
+    get commitHash() {
+        if (github.context.payload.pull_request) {
+            return github.context.payload.pull_request.head.sha;
+        }
+        return github.context.sha || super.commitHash;
+    }
     get targetBranch() {
         if (github.context.payload.pull_request) {
             return github.context.payload.pull_request.base.ref;
