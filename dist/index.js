@@ -42629,8 +42629,11 @@ const options = (0, getOptions_1.getOptions)();
     },
 })
     .then(({ score }) => {
-    core.info(`Quality Gate is ${score.outcome}`);
     core.setOutput("score", score);
+    core.info(`Continuous Accessibility Quality Gate is ${score.outcome}`);
+    if (score.outcome === "FAILED") {
+        core.setFailed("Continuous Accessibility Quality Gate is failed");
+    }
 })
     .catch((error) => {
     core.setFailed(error.message);
