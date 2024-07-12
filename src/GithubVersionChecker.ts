@@ -1,18 +1,16 @@
-import { Logger, Semver, VersionChecker } from "@userway/cicd-core";
-import { name, version } from "../package.json";
+import * as userway from "@userway/cicd-core";
+import * as packagejson from "../package.json";
 
-export class GithubVersionChecker implements VersionChecker {
-  constructor(private logger: Logger, private semver: Semver) {}
-
-  public check(versions: Record<typeof name, string>): void {
-    if (this.semver.lt(version, versions[name])) {
-      this.logger.warn(this.message);
-    }
-  }
+export class GithubVersionChecker
+  extends userway.CoreVersionChecker
+  implements userway.VersionChecker
+{
+  public readonly name = packagejson.name as userway.VersionChecker["name"];
+  public readonly version = packagejson.version;
 
   public get message(): string {
     return `
-        The current version of ${name} is outdated.
+        The current version of ${this.name} is outdated.
         Please consider updating to the latest version.
     `;
   }

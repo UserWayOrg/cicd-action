@@ -1,11 +1,9 @@
 import * as core from "@actions/core";
 import * as userway from "@userway/cicd-core";
 
-const filterEmpty = userway.filter<
-  userway.Config & {
-    configPath?: string;
-  }
->((property): boolean => property !== "");
+const filterEmpty = userway.filter<userway.Options>(
+  (property): boolean => property !== ""
+);
 
 export function getOptions() {
   return filterEmpty({
