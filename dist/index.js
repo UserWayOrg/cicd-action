@@ -42419,7 +42419,7 @@ exports.NEVER = parseUtil_1.INVALID;
 
 /***/ }),
 
-/***/ 1632:
+/***/ 8468:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -42448,10 +42448,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GithubAutodetectConfig = void 0;
+exports.GithubAutodetectedConfig = void 0;
 const github = __importStar(__nccwpck_require__(5438));
 const userway = __importStar(__nccwpck_require__(1203));
-class GithubAutodetectConfig extends userway.GitAutodetectedConfig {
+class GithubAutodetectedConfig extends userway.GitAutodetectedConfig {
     get commitHash() {
         if (github.context.payload.pull_request) {
             return github.context.payload.pull_request.head.sha;
@@ -42469,7 +42469,7 @@ class GithubAutodetectConfig extends userway.GitAutodetectedConfig {
         }
     }
 }
-exports.GithubAutodetectConfig = GithubAutodetectConfig;
+exports.GithubAutodetectedConfig = GithubAutodetectedConfig;
 
 
 /***/ }),
@@ -42615,14 +42615,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const cicd_core_1 = __nccwpck_require__(1203);
-const GithubAutodetectConfig_1 = __nccwpck_require__(1632);
+const GithubAutodetectedConfig_1 = __nccwpck_require__(8468);
 const GithubVersionChecker_1 = __nccwpck_require__(9628);
 const getOptions_1 = __nccwpck_require__(3354);
 const options = (0, getOptions_1.getOptions)();
 (0, cicd_core_1.scan)(options, {
     logger: { ...core, warn: core.warning },
     autodetectedConfigFactory: ({ logger }) => {
-        return new GithubAutodetectConfig_1.GithubAutodetectConfig(logger);
+        return new GithubAutodetectedConfig_1.GithubAutodetectedConfig(logger);
     },
     versionCheckerFactory: ({ logger, api }) => {
         return new GithubVersionChecker_1.GithubVersionChecker(logger, api);
