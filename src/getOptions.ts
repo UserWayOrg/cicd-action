@@ -2,8 +2,17 @@ import * as core from "@actions/core";
 import * as userway from "@userway/cicd-core";
 
 const filterEmpty = userway.filter<userway.Options>(
-  (property): boolean => property !== ""
+  (property) => property !== "" && property !== undefined
 );
+
+function parseBoolean(value: string): boolean | undefined {
+  const lower = value.toLowerCase();
+
+  if (lower === "true") return true;
+  if (lower === "false") return false;
+
+  return undefined;
+}
 
 export function getOptions() {
   return filterEmpty({
@@ -31,7 +40,7 @@ export function getOptions() {
 
     server: core.getInput("server"),
     timeout: core.getInput("timeout"),
-    dryRun: core.getInput("dry_run") === "true",
+    dryRun: parseBoolean(core.getInput("dry_run")),
     verbose: core.isDebug(),
   });
 }
