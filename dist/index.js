@@ -48076,7 +48076,7 @@ module.exports = JSON.parse('{"application/1d-interleaved-parityfec":{"source":"
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"@userway/cicd-github","version":"0.0.75","description":"","main":"dist/index.js","scripts":{"package":"ncc build src/index.ts --license licenses.txt"},"keywords":[],"author":"","license":"ISC","dependencies":{"@actions/core":"^1.10.1","@actions/github":"^6.0.0","@userway/cicd-core":"^0.0.107"},"devDependencies":{"@types/node":"^20.11.19","@vercel/ncc":"^0.38.1","typescript":"^5.3.3"}}');
+module.exports = JSON.parse('{"name":"@userway/cicd-github","version":"0.0.75","description":"","main":"dist/index.js","scripts":{"package":"ncc build src/index.ts --license licenses.txt"},"keywords":[],"author":"","license":"ISC","dependencies":{"@actions/core":"^1.10.1","@actions/github":"^6.0.0","@userway/cicd-core":"^0.0.111"},"devDependencies":{"@types/node":"^20.11.19","@vercel/ncc":"^0.38.1","typescript":"^5.3.3"}}');
 
 /***/ })
 
