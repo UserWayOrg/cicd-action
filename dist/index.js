@@ -20,17 +20,17 @@ module.exports = webpackEmptyAsyncContext;
 
 /***/ }),
 
-/***/ 14:
+/***/ 1864:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = require(__nccwpck_require__.ab + "ngrok.darwin-arm64.node")
+module.exports = require(__nccwpck_require__.ab + "ngrok.linux-x64-gnu.node")
 
 /***/ }),
 
-/***/ 3930:
+/***/ 1032:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = require(__nccwpck_require__.ab + "ngrok.darwin-universal.node")
+module.exports = require(__nccwpck_require__.ab + "ngrok.linux-x64-musl.node")
 
 /***/ }),
 
@@ -2234,7 +2234,7 @@ switch (platform) {
       if (localFileExisted) {
         nativeBinding = __nccwpck_require__(3042)
       } else {
-        nativeBinding = __nccwpck_require__(3930)
+        nativeBinding = __nccwpck_require__(3024)
       }
       break
     } catch {}
@@ -2259,7 +2259,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = __nccwpck_require__(3758)
           } else {
-            nativeBinding = __nccwpck_require__(14)
+            nativeBinding = __nccwpck_require__(3776)
           }
         } catch (e) {
           loadError = e
@@ -2295,7 +2295,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = __nccwpck_require__(1335)
             } else {
-              nativeBinding = __nccwpck_require__(2421)
+              nativeBinding = __nccwpck_require__(1032)
             }
           } catch (e) {
             loadError = e
@@ -2308,7 +2308,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = __nccwpck_require__(7529)
             } else {
-              nativeBinding = __nccwpck_require__(2528)
+              nativeBinding = __nccwpck_require__(1864)
             }
           } catch (e) {
             loadError = e
@@ -41144,6 +41144,22 @@ module.exports = eval("require")("@ngrok/ngrok-android-arm64");
 
 /***/ }),
 
+/***/ 3776:
+/***/ ((module) => {
+
+module.exports = eval("require")("@ngrok/ngrok-darwin-arm64");
+
+
+/***/ }),
+
+/***/ 3024:
+/***/ ((module) => {
+
+module.exports = eval("require")("@ngrok/ngrok-darwin-universal");
+
+
+/***/ }),
+
 /***/ 3316:
 /***/ ((module) => {
 
@@ -41180,22 +41196,6 @@ module.exports = eval("require")("@ngrok/ngrok-linux-arm64-gnu");
 /***/ ((module) => {
 
 module.exports = eval("require")("@ngrok/ngrok-linux-arm64-musl");
-
-
-/***/ }),
-
-/***/ 2528:
-/***/ ((module) => {
-
-module.exports = eval("require")("@ngrok/ngrok-linux-x64-gnu");
-
-
-/***/ }),
-
-/***/ 2421:
-/***/ ((module) => {
-
-module.exports = eval("require")("@ngrok/ngrok-linux-x64-musl");
 
 
 /***/ }),

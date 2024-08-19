@@ -274,10 +274,10 @@ IN THE SOFTWARE.
    limitations under the License.
 
 
-@ngrok/ngrok-darwin-arm64
+@ngrok/ngrok-linux-x64-gnu
 MIT
 
-@ngrok/ngrok-darwin-universal
+@ngrok/ngrok-linux-x64-musl
 MIT
 
 @octokit/auth-token
