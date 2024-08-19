@@ -1,4 +1,4 @@
-name: Run package script on push
+name: Auto-update package
 
 on:
   push:
