@@ -15,11 +15,11 @@ scan(options, {
     return new GithubVersionChecker(logger, api);
   },
 })
-  .then(({ score }) => {
+  .then(({ score, shouldFail }) => {
     core.setOutput("score", score);
     core.info(`Continuous Accessibility Quality Gate is ${score.outcome}`);
 
-    if (score.outcome === "FAILED") {
+    if (shouldFail) {
       core.setFailed("Continuous Accessibility Quality Gate is failed");
     }
   })
