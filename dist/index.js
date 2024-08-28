@@ -40927,7 +40927,20 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOptions = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const userway = __importStar(__nccwpck_require__(1203));
-const filterEmpty = userway.filter((property) => property !== "");
+const filterEmpty = userway.filter((property) => {
+    const isNotUndefined = property !== undefined;
+    const isNotEmptyString = property !== "";
+    const isNotEmptyArray = Array.isArray(property) ? property.length > 0 : true;
+    return isNotUndefined && isNotEmptyString && isNotEmptyArray;
+});
+function parseBoolean(value) {
+    const lower = value.toLowerCase();
+    if (lower === "true")
+        return true;
+    if (lower === "false")
+        return false;
+    return undefined;
+}
 function getOptions() {
     return filterEmpty({
         configPath: core.getInput("config_path"),
@@ -40945,11 +40958,12 @@ function getOptions() {
         retention: core.getInput("retention"),
         scope: core.getInput("scope"),
         assigneeEmail: core.getInput("assignee_email"),
-        reportPaths: core.getMultilineInput("report_paths"),
+        reportPaths: core.getInput("report_paths").split(",").filter(Boolean),
         concurrency: core.getInput("concurrency"),
         server: core.getInput("server"),
         timeout: core.getInput("timeout"),
-        dryRun: core.getInput("dry_run") === "true",
+        dryRun: parseBoolean(core.getInput("dry_run")),
+        ignoreQualityGate: parseBoolean(core.getInput("ignore_quality_gate")),
         verbose: core.isDebug(),
     });
 }

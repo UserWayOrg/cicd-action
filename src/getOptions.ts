@@ -1,9 +1,22 @@
 import * as core from "@actions/core";
 import * as userway from "@userway/cicd-core";
 
-const filterEmpty = userway.filter<userway.Options>(
-  (property): boolean => property !== ""
-);
+const filterEmpty = userway.filter<userway.Options>((property) => {
+  const isNotUndefined = property !== undefined;
+  const isNotEmptyString = property !== "";
+  const isNotEmptyArray = Array.isArray(property) ? property.length > 0 : true;
+
+  return isNotUndefined && isNotEmptyString && isNotEmptyArray;
+});
+
+function parseBoolean(value: string): boolean | undefined {
+  const lower = value.toLowerCase();
+
+  if (lower === "true") return true;
+  if (lower === "false") return false;
+
+  return undefined;
+}
 
 export function getOptions() {
   return filterEmpty({
@@ -26,12 +39,13 @@ export function getOptions() {
     scope: core.getInput("scope") as userway.Config["scope"],
     assigneeEmail: core.getInput("assignee_email"),
 
-    reportPaths: core.getMultilineInput("report_paths"),
+    reportPaths: core.getInput("report_paths").split(",").filter(Boolean),
     concurrency: core.getInput("concurrency"),
 
     server: core.getInput("server"),
     timeout: core.getInput("timeout"),
-    dryRun: core.getInput("dry_run") === "true",
+    dryRun: parseBoolean(core.getInput("dry_run")),
+    ignoreQualityGate: parseBoolean(core.getInput("ignore_quality_gate")),
     verbose: core.isDebug(),
   });
 }
