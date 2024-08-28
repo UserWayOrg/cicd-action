@@ -45,6 +45,7 @@ export function getOptions() {
     server: core.getInput("server"),
     timeout: core.getInput("timeout"),
     dryRun: parseBoolean(core.getInput("dry_run")),
+    ignoreQualityGate: parseBoolean(core.getInput("ignore_quality_gate")),
     verbose: core.isDebug(),
   });
 }
