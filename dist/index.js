@@ -20,20 +20,6 @@ module.exports = webpackEmptyAsyncContext;
 
 /***/ }),
 
-/***/ 14:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-module.exports = require(__nccwpck_require__.ab + "ngrok.darwin-arm64.node")
-
-/***/ }),
-
-/***/ 3930:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-module.exports = require(__nccwpck_require__.ab + "ngrok.darwin-universal.node")
-
-/***/ }),
-
 /***/ 7351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -2234,7 +2220,7 @@ switch (platform) {
       if (localFileExisted) {
         nativeBinding = __nccwpck_require__(3042)
       } else {
-        nativeBinding = __nccwpck_require__(3930)
+        nativeBinding = __nccwpck_require__(3024)
       }
       break
     } catch {}
@@ -2259,7 +2245,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = __nccwpck_require__(3758)
           } else {
-            nativeBinding = __nccwpck_require__(14)
+            nativeBinding = __nccwpck_require__(3776)
           }
         } catch (e) {
           loadError = e
@@ -41259,6 +41245,22 @@ module.exports = eval("require")("@ngrok/ngrok-android-arm-eabi");
 /***/ ((module) => {
 
 module.exports = eval("require")("@ngrok/ngrok-android-arm64");
+
+
+/***/ }),
+
+/***/ 3776:
+/***/ ((module) => {
+
+module.exports = eval("require")("@ngrok/ngrok-darwin-arm64");
+
+
+/***/ }),
+
+/***/ 3024:
+/***/ ((module) => {
+
+module.exports = eval("require")("@ngrok/ngrok-darwin-universal");
 
 
 /***/ }),

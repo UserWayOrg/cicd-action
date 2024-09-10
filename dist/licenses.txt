@@ -274,12 +274,6 @@ IN THE SOFTWARE.
    limitations under the License.
 
 
-@ngrok/ngrok-darwin-arm64
-MIT
-
-@ngrok/ngrok-darwin-universal
-MIT
-
 @octokit/auth-token
 MIT
 The MIT License
