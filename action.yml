@@ -23,19 +23,10 @@ inputs:
     description: "Commit created at"
   branch:
     description: "Branch name"
-  target_branch:
-    description: "Target branch"
-  pull_request:
-    description: "Pull request number"
   contributor_name:
     description: "Contributor name"
   contributor_email:
     description: "Contributor email"
-
-  retention:
-    description: "Retention period"
-  scope:
-    description: "Analysis scope"
   assignee_email:
     description: "Assignee email"
 

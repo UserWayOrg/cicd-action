@@ -30,13 +30,9 @@ export function getOptions() {
     commitMessage: core.getInput("commit_message"),
     commitCreatedAt: core.getInput("commit_created_at"),
     branch: core.getInput("branch"),
-    targetBranch: core.getInput("target_branch"),
-    pullRequest: core.getInput("pull_request"),
     contributorName: core.getInput("contributor_name"),
     contributorEmail: core.getInput("contributor_email"),
 
-    retention: core.getInput("retention") as userway.Config["retention"],
-    scope: core.getInput("scope") as userway.Config["scope"],
     assigneeEmail: core.getInput("assignee_email"),
 
     reportPaths: core.getInput("report_paths").split(",").filter(Boolean),
