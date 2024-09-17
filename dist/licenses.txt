@@ -274,6 +274,12 @@ IN THE SOFTWARE.
    limitations under the License.
 
 
+@ngrok/ngrok-linux-x64-gnu
+MIT
+
+@ngrok/ngrok-linux-x64-musl
+MIT
+
 @octokit/auth-token
 MIT
 The MIT License
