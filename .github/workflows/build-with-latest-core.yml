@@ -18,6 +18,9 @@ jobs:
       - name: Update @userway/cicd-core package
         run: npm install @userway/cicd-core
 
+      - name: Echo
+        run: cat package.json
+
       - name: Run package script
         run: npm run package
 
