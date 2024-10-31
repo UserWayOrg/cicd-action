@@ -16,7 +16,7 @@ jobs:
           node-version: "20.x"
 
       - name: Update @userway/cicd-core package
-        run: npm install @userway/cicd-core
+        run: npm install @userway/cicd-core && cat package.json
 
       - name: Echo
         run: cat package.json
