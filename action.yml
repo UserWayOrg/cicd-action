@@ -41,6 +41,8 @@ inputs:
     description: "Timeout"
   dry_run:
     description: "Dry run mode"
+  verbose:
+    description: "Verbose mode"
 
 outputs:
   score:
