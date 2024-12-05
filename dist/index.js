@@ -49908,7 +49908,7 @@ function getOptions() {
         timeout: core.getInput("timeout"),
         dryRun: parseBoolean(core.getInput("dry_run")),
         ignoreQualityGate: parseBoolean(core.getInput("ignore_quality_gate")),
-        verbose: parseBoolean(core.getInput("verbose")) || core.isDebug(),
+        verbose: core.isDebug(),
     });
 }
 
