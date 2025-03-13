@@ -16,7 +16,7 @@ jobs:
           node-version: "20.x"
 
       - name: Update @userway/cicd-core package
-        run: npx npm-check-updates -u @userway/cicd-core && npm install @userway/cicd-core
+        run: npx npm-check-updates -u @userway/cicd-core && npm install @userway/cicd-core@alpha
 
       - name: Run package script
         run: npm run package
