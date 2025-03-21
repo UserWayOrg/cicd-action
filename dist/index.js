@@ -49911,7 +49911,7 @@ function getOptions() {
         timeout: core.getInput("timeout"),
         dryRun: parseBoolean(core.getInput("dry_run")),
         ignoreQualityGate: parseBoolean(core.getInput("ignore_quality_gate")),
-        verbose: parseBoolean(core.getInput("verbose")) || core.isDebug(),
+        verbose: core.isDebug(),
     });
 }
 
@@ -56946,7 +56946,11 @@ module.exports = JSON.parse('{"application/1d-interleaved-parityfec":{"source":"
 /***/ ((module) => {
 
 "use strict";
+<<<<<<< HEAD
 module.exports = JSON.parse('{"name":"@userway/cicd-github","version":"0.0.75","description":"","main":"dist/index.js","scripts":{"package":"ncc build src/index.ts --license licenses.txt"},"keywords":[],"author":"","license":"ISC","dependencies":{"@actions/core":"^1.10.1","@actions/github":"^6.0.0","@userway/cicd-core":"^0.0.159"},"devDependencies":{"@types/node":"^20.11.19","@vercel/ncc":"^0.38.1","typescript":"^5.3.3"}}');
+=======
+module.exports = JSON.parse('{"name":"@userway/cicd-github","version":"0.0.75","description":"","main":"dist/index.js","scripts":{"package":"ncc build src/index.ts --license licenses.txt"},"keywords":[],"author":"","license":"ISC","dependencies":{"@actions/core":"^1.10.1","@actions/github":"^6.0.0","@userway/cicd-core":"^0.0.159-beta.79"},"devDependencies":{"@types/node":"^20.11.19","@vercel/ncc":"^0.38.1","typescript":"^5.3.3"}}');
+>>>>>>> qa
 
 /***/ })
 
