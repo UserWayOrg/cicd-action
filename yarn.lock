@@ -147,20 +147,20 @@
   resolved "https://registry.npmjs.org/@userway/a11y-knowledge-base/-/a11y-knowledge-base-0.0.7.tgz"
   integrity sha512-RzNd7GxudUYHWJlUf1l9MCVoTNFZya8GHg122yJKre0Zp84eFcDI6mbguvCvmlFQOcXDvb8xZ222BDZXsYp+ZQ==
 
-"@userway/cicd-api@0.1.4-alpha.28+08e5553a4":
-  version "0.1.4-alpha.28"
-  resolved "https://registry.npmjs.org/@userway/cicd-api/-/cicd-api-0.1.4-alpha.28.tgz"
-  integrity sha512-4MWci0uYfPNlqALB19WWPwLUzkWs/Xhi4Cih/NmW2L8Kq7y6CqzAFimKnVBguwua19JV/CqQwAtvQhiS1gchIQ==
+"@userway/cicd-api@0.1.4-alpha.37+c1a6dd716":
+  version "0.1.4-alpha.37"
+  resolved "https://registry.npmjs.org/@userway/cicd-api/-/cicd-api-0.1.4-alpha.37.tgz"
+  integrity sha512-7lkmmzXq4OGphBIR4sDfK8ClfVNDFG1ka9wKIddO+TrarxI4IjZ5qz08LRG8EyI8fH1Vo/fvUijkGeGc+SGmAw==
   dependencies:
     "@userway/a11y-knowledge-base" "0.0.7"
 
-"@userway/cicd-core@^0.1.4-alpha.28":
-  version "0.1.4-alpha.28"
-  resolved "https://registry.npmjs.org/@userway/cicd-core/-/cicd-core-0.1.4-alpha.28.tgz"
-  integrity sha512-fsx0YpC9+k8yxFCGrjFfsnrMDU/xWvZG+TEGAPYlUR0AXfK7g4rTjFPt3PpaXE3RvzapbFPJcHFK+pknmsEB7g==
+"@userway/cicd-core@^0.1.4-alpha.37":
+  version "0.1.4-alpha.37"
+  resolved "https://registry.npmjs.org/@userway/cicd-core/-/cicd-core-0.1.4-alpha.37.tgz"
+  integrity sha512-yRLRCMmT6eZ8U8dHzDipCjzuFj0QgQdC50609KVzyqKyqfwxJO4SjT+GYoZ6fpiLzTeIX8aLINyzVKILpVmALg==
   dependencies:
     "@supercharge/promise-pool" "^3.2.0"
-    "@userway/cicd-api" "0.1.4-alpha.28+08e5553a4"
+    "@userway/cicd-api" "0.1.4-alpha.37+c1a6dd716"
     axios "^1.7.2"
     axios-retry "^4.4.1"
     cli-table3 "^0.6.5"
