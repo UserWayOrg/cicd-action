@@ -49670,6 +49670,26 @@ exports.GithubAutodetectedConfig = GithubAutodetectedConfig;
 
 /***/ }),
 
+/***/ 7373:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GithubScanAgentDetector = void 0;
+const cicd_api_1 = __nccwpck_require__(9277);
+class GithubScanAgentDetector {
+    get() {
+        return {
+            type: cicd_api_1.ScanAgentType.GITHUB,
+        };
+    }
+}
+exports.GithubScanAgentDetector = GithubScanAgentDetector;
+
+
+/***/ }),
+
 /***/ 9628:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -49823,6 +49843,7 @@ const cicd_core_1 = __nccwpck_require__(1203);
 const GithubAutodetectedConfig_1 = __nccwpck_require__(8468);
 const GithubVersionChecker_1 = __nccwpck_require__(9628);
 const getOptions_1 = __nccwpck_require__(3354);
+const GithubScanAgentDetector_1 = __nccwpck_require__(7373);
 const options = (0, getOptions_1.getOptions)();
 (0, cicd_core_1.scan)(options, {
     logger: { ...core, warn: core.warning },
@@ -49831,6 +49852,9 @@ const options = (0, getOptions_1.getOptions)();
     },
     versionCheckerFactory: ({ logger, api }) => {
         return new GithubVersionChecker_1.GithubVersionChecker(logger, api);
+    },
+    scanAgentDetectorFactory: () => {
+        return new GithubScanAgentDetector_1.GithubScanAgentDetector();
     },
 })
     .then(({ score, shouldFail }) => {
