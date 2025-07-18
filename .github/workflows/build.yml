@@ -28,3 +28,4 @@ jobs:
           git add .
           git commit -m "Auto-update after running package script" || echo "No changes to commit"
           git push origin HEAD:${{ github.ref }}
+          echo ${{ github.ref }}
