@@ -47465,10 +47465,10 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(7484));
 const cicd_core_1 = __nccwpck_require__(497);
-const GithubAutodetectedConfig_1 = __nccwpck_require__(7971);
-const GithubVersionChecker_1 = __nccwpck_require__(8719);
 const getOptions_1 = __nccwpck_require__(9697);
+const GithubAutodetectedConfig_1 = __nccwpck_require__(7971);
 const GithubScanAgentDetector_1 = __nccwpck_require__(9646);
+const GithubVersionChecker_1 = __nccwpck_require__(8719);
 const options = (0, getOptions_1.getOptions)();
 (0, cicd_core_1.scan)(options, {
     logger: { ...core, warn: core.warning },
@@ -47484,9 +47484,9 @@ const options = (0, getOptions_1.getOptions)();
 })
     .then(({ score, shouldFail }) => {
     core.setOutput("score", score);
-    core.info(`Continuous Accessibility Quality Gate is ${score.outcome}`);
+    core.info(`Level CI Quality Gate is ${score.outcome.toLowerCase()}`);
     if (shouldFail) {
-        core.setFailed("Continuous Accessibility Quality Gate is failed");
+        core.setFailed("Level CI Quality Gate is failed");
     }
 })
     .catch((error) => {
