@@ -169,10 +169,10 @@
   dependencies:
     "@userway/a11y-knowledge-base" "0.0.7"
 
-"@userway/cicd-core@^0.1.5-alpha.22":
-  version "0.1.5-alpha.22"
-  resolved "https://registry.npmjs.org/@userway/cicd-core/-/cicd-core-0.1.5-alpha.22.tgz"
-  integrity sha512-0JfD2g635nTWjTQF998a9kpE4jP1iWn25J/nEiNw1iMbfyphTVQwK/mY3oImPfuWuxgD5Y3RgiRfv6uQL5zZyA==
+"@userway/cicd-core@^0.1.5-alpha.26":
+  version "0.1.5-alpha.26"
+  resolved "https://registry.npmjs.org/@userway/cicd-core/-/cicd-core-0.1.5-alpha.26.tgz"
+  integrity sha512-+xEZPRpgRqCUYh7E0rD8jTqQBzHy2i85AmNvBmvMpqDBUypa76bqpZhBzNdYHQCkfbIh3CMbikfLDlfuEemIuA==
   dependencies:
     "@supercharge/promise-pool" "^3.2.0"
     "@userway/cicd-api" "0.1.4"
