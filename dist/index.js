@@ -47273,10 +47273,17 @@ exports.GithubAutodetectedConfig = GithubAutodetectedConfig;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GithubScanAgentDetector = void 0;
 const cicd_api_1 = __nccwpck_require__(3066);
+const package_json_1 = __nccwpck_require__(8330);
 class GithubScanAgentDetector {
+    logger;
+    constructor(logger) {
+        this.logger = logger;
+    }
     get() {
+        this.logger.debug(`Using ${cicd_api_1.ScanAgentType.GITHUB} scan agent version ${package_json_1.version}`);
         return {
             type: cicd_api_1.ScanAgentType.GITHUB,
+            version: package_json_1.version,
         };
     }
 }
@@ -47465,10 +47472,10 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(7484));
 const cicd_core_1 = __nccwpck_require__(497);
-const GithubAutodetectedConfig_1 = __nccwpck_require__(7971);
-const GithubVersionChecker_1 = __nccwpck_require__(8719);
 const getOptions_1 = __nccwpck_require__(9697);
+const GithubAutodetectedConfig_1 = __nccwpck_require__(7971);
 const GithubScanAgentDetector_1 = __nccwpck_require__(9646);
+const GithubVersionChecker_1 = __nccwpck_require__(8719);
 const options = (0, getOptions_1.getOptions)();
 (0, cicd_core_1.scan)(options, {
     logger: { ...core, warn: core.warning },
@@ -47478,8 +47485,8 @@ const options = (0, getOptions_1.getOptions)();
     versionCheckerFactory: ({ logger, api }) => {
         return new GithubVersionChecker_1.GithubVersionChecker(logger, api);
     },
-    scanAgentDetectorFactory: () => {
-        return new GithubScanAgentDetector_1.GithubScanAgentDetector();
+    scanAgentDetectorFactory: ({ logger }) => {
+        return new GithubScanAgentDetector_1.GithubScanAgentDetector(logger);
     },
 })
     .then(({ score, shouldFail }) => {
