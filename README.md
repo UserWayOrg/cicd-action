@@ -34,8 +34,8 @@ The workflow, usually declared in .github/workflows/build.yml, looks like:
     # .github/workflows/build.yml
     - name: Level CI Accessibility Analysis
       uses: UserWayOrg/cicd-action@main
-      env:
-        LEVEL_CI_TOKEN: ${{ secrets.LEVEL_CI_TOKEN }}
+      with:
+        token: ${{ secrets.LEVEL_CI_TOKEN }}
 
 **Secrets:**
 
