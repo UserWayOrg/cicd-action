@@ -1,9 +1,9 @@
 import * as core from "@actions/core";
 import { scan } from "@userway/cicd-core";
-import { GithubAutodetectedConfig } from "./GithubAutodetectedConfig";
-import { GithubVersionChecker } from "./GithubVersionChecker";
 import { getOptions } from "./getOptions";
+import { GithubAutodetectedConfig } from "./GithubAutodetectedConfig";
 import { GithubScanAgentDetector } from "./GithubScanAgentDetector";
+import { GithubVersionChecker } from "./GithubVersionChecker";
 
 const options = getOptions();
 
@@ -15,8 +15,8 @@ scan(options, {
   versionCheckerFactory: ({ logger, api }) => {
     return new GithubVersionChecker(logger, api);
   },
-  scanAgentDetectorFactory: () => {
-    return new GithubScanAgentDetector();
+  scanAgentDetectorFactory: ({ logger }) => {
+    return new GithubScanAgentDetector(logger);
   },
 })
   .then(({ score, shouldFail }) => {
