@@ -47491,9 +47491,9 @@ const options = (0, getOptions_1.getOptions)();
 })
     .then(({ score, shouldFail }) => {
     core.setOutput("score", score);
-    core.info(`Continuous Accessibility Quality Gate is ${score.outcome}`);
+    core.info(`Level CI Quality Gate is ${score.outcome.toLowerCase()}`);
     if (shouldFail) {
-        core.setFailed("Continuous Accessibility Quality Gate is failed");
+        core.setFailed("Level CI Quality Gate is failed");
     }
 })
     .catch((error) => {
