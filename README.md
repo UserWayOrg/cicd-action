@@ -32,10 +32,23 @@ Project metadata, including the location of the reports to be analyzed, must be 
 The workflow, usually declared in .github/workflows/build.yml, looks like:
 
     # .github/workflows/build.yml
-    - name: Level CI Accessibility Analysis
-      uses: UserWayOrg/cicd-action@main
-      with:
-        token: ${{ secrets.LEVEL_CI_TOKEN }}
+    on:
+      push:
+      branches:
+      - master
+      pull_request:
+      types: [opened, synchronize, reopened]
+    name: Main Workflow
+    jobs:
+      userway-cicd:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+
+        - name: Level CI Accessibility Analysis
+          uses: UserWayOrg/cicd-action@main
+          with:
+            token: ${{ secrets.LEVEL_CI_TOKEN }}
 
 **Secrets:**
 
